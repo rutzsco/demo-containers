@@ -1,0 +1,32 @@
+name: 1.0.$(Rev:r)
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  dockerRegistryServiceConnection: '194d664f-f187-4cde-bc1a-02b8486a5356'
+  imageRepository: 'simulation/demo-api'
+  containerRegistry: 'rutzscocr.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Demo.API/Dockerfile'
+  tag: '$(Build.BuildNumber)'
+
+steps:
+
+- task: Docker@2
+  displayName: Build and push an image to container registry
+  inputs:
+    command: buildAndPush
+    repository: $(imageRepository)
+    dockerfile: $(dockerfilePath)
+    containerRegistry: $(dockerRegistryServiceConnection)
+    tags: $(tag)
+    
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: 'Infrastructure'
+    artifact: 'Infrastructure'
+    publishLocation: 'pipeline'
