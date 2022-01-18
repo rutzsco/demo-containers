@@ -8,7 +8,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  dockerRegistryServiceConnection: '194d664f-f187-4cde-bc1a-02b8486a5356'
+  dockerRegistryServiceConnection: 'a9e35dc1-0272-4f15-a968-88b81d71df31'
   imageRepository: 'simulation/demo-api'
   containerRegistry: 'rutzscocr.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Demo.API/Dockerfile'
