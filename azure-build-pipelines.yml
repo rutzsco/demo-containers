@@ -29,9 +29,3 @@ steps:
     targetPath: 'Infrastructure'
     artifact: 'Infrastructure'
     publishLocation: 'pipeline'
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: 'Demo.API/Deploy'
-    artifact: 'Infrastructure'
-    publishLocation: 'pipeline'
