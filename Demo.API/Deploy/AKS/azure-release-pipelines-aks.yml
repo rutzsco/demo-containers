@@ -31,7 +31,7 @@ stages:
             - task: AzureCLI@2
               displayName: 3. Create Namespaces
               inputs:
-                azureSubscription: ${{ parameters.azureSubscription }}
+                azureSubscription:  $(azureSubscription)
                 scriptType: bash
                 scriptLocation: inlineScript
                 inlineScript: |
