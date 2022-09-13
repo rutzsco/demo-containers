@@ -42,6 +42,6 @@ stages:
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'aks-rutzsco-aks-001'
-                namespace: 'dapr-traffic-control'
+                namespace: 'simulationservice'
                 manifests: '$(Pipeline.Workspace)/build/Infrastructure/AKS/deployment.yaml'
                 containers: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'
