@@ -20,7 +20,7 @@ namespace DemoAPI.Controllers
             _configuration = config;
         }
 
-        [HttpGet("status")]
+        [HttpGet("")]
         public IActionResult Get()
         {
             var version = _configuration["APPLICATION_VERSION"];
@@ -28,7 +28,7 @@ namespace DemoAPI.Controllers
             return new OkObjectResult(vm);
         }
 
-        [HttpGet("status/full")]
+        [HttpGet("full")]
         public IEnumerable<KeyValuePair<string, string>> GetFull()
         {
             var values = _configuration.AsEnumerable().Select(c => new KeyValuePair<string,string>(c.Key,c.Value));

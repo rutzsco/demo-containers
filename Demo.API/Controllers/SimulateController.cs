@@ -41,7 +41,7 @@ namespace DemoAPI.Controllers
             return "OK";
         }
 
-        [HttpGet("api/simulate/log/write")]
+        [HttpGet("log/write")]
         public string Write()
         {
             System.IO.File.WriteAllText($"/var/log/{Guid.NewGuid()}.txt", "HI");
