@@ -29,7 +29,7 @@ stages:
   
             steps:
             - task: AzureCLI@2
-              displayName: 3. Create Namespaces
+              displayName: 1. Create Namespaces
               inputs:
                 azureSubscription:  $(azureSubscription)
                 scriptType: bash
@@ -38,6 +38,7 @@ stages:
                   az aks get-credentials -n $(clusterName) -g $(resourceGroupName)
                   kubectl apply -f $(Pipeline.Workspace)/build/Deploy/namespace.yaml
             - task: KubernetesManifest@0
+              displayName: 2. Deploy to AKS
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'rutzsco-aks1'
