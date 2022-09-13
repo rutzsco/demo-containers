@@ -7,8 +7,8 @@ resources:
   
 variables:
   azureSubscription: 'Demo Account'
-  resourceGroupName: 'Demo Account'
-  clusterName: 'Demo Account'
+  resourceGroupName: 'rutzsco-aks-001'
+  clusterName: 'aks-rutzsco-aks-001'
 
 stages:
 
