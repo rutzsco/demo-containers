@@ -36,12 +36,12 @@ stages:
                 scriptLocation: inlineScript
                 inlineScript: |
                   az aks get-credentials -n $(clusterName) -g $(resourceGroupName)
-                  kubectl apply -f $(Pipeline.Workspace)/build/Deploy/namespace.yaml
+                  kubectl apply -f $(Pipeline.Workspace)/build/Infrstructure/AKS/namespace.yaml
             - task: KubernetesManifest@0
               displayName: 2. Deploy to AKS
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'aks-rutzsco-aks-001'
                 namespace: 'dapr-traffic-control'
-                manifests: '$(Pipeline.Workspace)/build/Deploy/deployment.yaml'
+                manifests: '$(Pipeline.Workspace)/build/Infrstructure/AKS/deployment.yaml'
                 containers: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'
