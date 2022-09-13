@@ -19,19 +19,19 @@ spec:
       containers:
       - name: simulationservice
         image: rutzscolabcr.azurecr.io/simulation/demo-api:latest
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /api/status
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /api/status
-              port: http
         imagePullPolicy: Always
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /api/status
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /api/status
+            port: http
         resources:
           requests:
             cpu: 100m
