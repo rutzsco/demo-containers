@@ -14,6 +14,8 @@ variables:
   environment: 'rutzsco-similation-service-aca-ci'
   containerImage: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'
   templateFile: '$(Pipeline.Workspace)/build/Infrastructure/ACA/main.bicep'
+  acrName: 'rutzscolabcr'
+  acrUsername: 'rutzscolabcr'
 
 stages:
 
@@ -40,4 +42,4 @@ stages:
                 scriptLocation: inlineScript
                 inlineScript: |
                   az group create --name $(resourceGroupName) --location $(location)  
-                  az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile) --parameters appName=$(appName) envName=$(environment) containerImage=$(containerImage) > outputs.json
+                  az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile) --parameters appName=$(appName) envName=$(environment) containerImage=$(containerImage) acrName=$(acrName) acrUsername=$(acrUsername) acrPassword=$(acrPassword) > outputs.json

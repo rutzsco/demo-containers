@@ -3,6 +3,10 @@ param envName string
 param appName string
 param containerImage string
 param containerPort int = 80
+@secure()
+param acrPassword string
+param acrUsername string
+param acrName string
 
 module law 'log-analytics.bicep' = {
 	name: 'log-analytics-workspace'
@@ -33,7 +37,9 @@ module containerApp 'aca.bicep' = {
     envVars: []
     useExternalIngress: true
     containerPort: containerPort
-
+    acrPassword: acrPassword
+    acrUsername: acrUsername
+    acrName: acrName
   }
 }
 
