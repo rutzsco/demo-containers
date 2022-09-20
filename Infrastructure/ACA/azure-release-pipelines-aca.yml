@@ -1,0 +1,29 @@
+trigger: none
+
+resources:
+  pipelines:
+  - pipeline: build
+    source: 'Simulation API - BUILD'
+    
+variables:
+  vmImageName: 'ubuntu-latest'
+  azureServiceConnection: 'Demo Account'
+  resourceGroupName: 'rutzsco-similation-service-aca'
+  location: 'eastus'
+  appName: 'rutzsco-similation-service-aca'
+  environment: 'rutzsco-similation-service-aca-ci'
+  containerImage: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'
+  templateFile: '$(Pipeline.Workspace)/build/Infrastructure/ACA/main.bicep'
+
+pool:
+  vmImage: $(vmImageName)
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: $(azureServiceConnection)
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      az group create --name $(resourceGroupName) --location $(location)  
+      az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile) --parameters appName=$(appName) envName=$(environment) containerImage=$(containerImage) > outputs.json
