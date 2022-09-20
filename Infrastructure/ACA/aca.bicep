@@ -16,7 +16,7 @@ param acrUsername string
 @secure()
 param acrPassword string
 
-var containerImageParts = split(containerImage, '@')
+var containerImageParts = split(containerImage, ':')
 
 resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
   name: name
