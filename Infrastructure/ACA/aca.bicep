@@ -24,7 +24,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
     configuration: {  
       secrets: [
         {
-            name: 'acrPassword'
+            name: 'acrpassword'
             value: acrPassword
         }
     ]
@@ -32,7 +32,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
         {
             server: '${acrName}.azurecr.io'
             username: acrUsername
-            passwordSecretRef: 'acrPassword'
+            passwordSecretRef: 'acrpassword'
         }
     ]
       ingress: {

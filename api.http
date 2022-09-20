@@ -1,5 +1,5 @@
-@baseUrl = http://40.88.214.135/
+@baseUrl = http://20.120.73.82
 
-### Demo - Account  
+### Status  
 GET  {{baseUrl}}/api/status
 content-type: application/json
