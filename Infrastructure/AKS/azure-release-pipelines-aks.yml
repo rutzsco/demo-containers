@@ -39,14 +39,7 @@ stages:
                   kubectl apply -f $(Pipeline.Workspace)/build/Infrastructure/AKS/namespace.yaml
 
                   export APPLICATION_VERSION_VALUE=$(resources.pipeline.build.runName)
-                  declare FILE_TO_REPLACE=$(Pipeline.Workspace)/build/Infrastructure/AKS/deployment.yaml
-                  declare TOKEN_PATTERN='(?<=\$\{)\w+(?=\})'
-                  declare TOKENS=$(grep -oP ${TOKEN_PATTERN} ${FILE_TO_REPLACE} | sort -u)
-                  for token in $TOKENS
-                  do
-                    echo "Replacing \${${token}} with ${!token}"
-                    sed -i "s/\${${token}}/${!token}/" ${FILE_TO_REPLACE}
-                  done
+                  envsubst < $(Pipeline.Workspace)/build/Infrastructure/AKS/deployment.yaml > $(Pipeline.Workspace)/build/Infrastructure/AKS/deployment-output.yaml
 
             - task: KubernetesManifest@0
               displayName: 2. Deploy to AKS
@@ -54,5 +47,5 @@ stages:
                 action: 'deploy'
                 kubernetesServiceConnection: 'aks-rutzsco-aks-001'
                 namespace: 'simulationservice'
-                manifests: '$(Pipeline.Workspace)/build/Infrastructure/AKS/deployment.yaml'
+                manifests: '$(Pipeline.Workspace)/build/Infrastructure/AKS/deployment-output.yaml'
                 containers: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'

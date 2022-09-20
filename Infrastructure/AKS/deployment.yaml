@@ -41,7 +41,7 @@ spec:
             memory: 200Mi
         env:
         - name: APPLICATION_VERSION
-          value: "APPLICATION_VERSION_VALUE"
+          value: $APPLICATION_VERSION_VALUE
 
 ---
 
