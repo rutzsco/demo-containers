@@ -8,9 +8,9 @@ resources:
 variables:
   vmImageName: 'ubuntu-latest'
   azureServiceConnection: 'Demo Account'
-  resourceGroupName: 'rutzsco-simulation-service-aca'
+  resourceGroupName: 'rutzsco-sim-service-aca'
   location: 'eastus'
-  appName: 'rutzsco-simulation-service-aca'
+  appName: 'rutzsco-sim-service-aca'
   environment: 'ci'
   containerImage: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'
   templateFile: '$(Pipeline.Workspace)/build/Infrastructure/ACA/main.bicep'
