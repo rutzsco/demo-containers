@@ -7,19 +7,20 @@ param containerPort int = 80
 param acrPassword string
 param acrUsername string
 param acrName string
+var stackname = '${appName}-${envName}'
 
 module law 'log-analytics.bicep' = {
 	name: 'log-analytics-workspace'
 	params: {
       location: location
-      name: 'law-${envName}'
+      name: '${stackname}-law'
 	}
 }
 
 module containerAppEnvironment 'aca-environment.bicep' = {
   name: 'container-app-environment'
   params: {
-    name: envName
+    name: stackname
     location: location
     
     lawClientId:law.outputs.clientId
@@ -28,9 +29,9 @@ module containerAppEnvironment 'aca-environment.bicep' = {
 }
 
 module containerApp 'aca.bicep' = {
-  name: appName
+  name: 'container-app'
   params: {
-    name: appName
+    name: stackname
     location: location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
     containerImage: containerImage

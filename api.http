@@ -1,10 +1,10 @@
-#@baseUrl = http://20.120.73.82
-@baseUrl = https://rutzsco-similation-service-aca.happyisland-d8fca1c2.eastus.azurecontainerapps.io
+@baseUrl = http://20.84.18.210
+#@baseUrl = https://rutzsco-similation-service-aca.happyisland-d8fca1c2.eastus.azurecontainerapps.io
 
 ### Status  
 GET  {{baseUrl}}/api/status
 content-type: application/json
 
 ### Simulate 
-GET  {{baseUrl}}/api/simulate/5
+GET  {{baseUrl}}/api/simulate/50?duration=1000
 content-type: application/json
