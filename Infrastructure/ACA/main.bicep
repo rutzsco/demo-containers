@@ -26,7 +26,7 @@ module containerAppEnvironment 'aca-environment.bicep' = {
     
     lawClientId:law.outputs.clientId
     lawClientSecret: law.outputs.clientSecret
-     appInsightsConnectionString: law.outputs.applicationInsightsConnectionString
+    appInsightsConnectionString: law.outputs.applicationInsightsConnectionString
   }
 }
 
@@ -40,9 +40,14 @@ module containerApp 'aca.bicep' = {
     location: location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
     containerImage: containerImage
-    envVars: [      {
+    envVars: [
+    {
       name: 'APPLICATION_VERSION'
       value: containerImageParts[1]
+    }  
+    {
+      name: 'APPLICATIONINSIGHTS_CONNECTION_STRING '
+      value: law.outputs.applicationInsightsConnectionString
     }]
     useExternalIngress: true
     containerPort: containerPort
