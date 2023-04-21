@@ -72,4 +72,34 @@ module containerApp 'aca.bicep' = {
   }
 }
 
+module containerAppHttp 'aca.bicep' = {
+  name: 'container-app-http'
+  params: {
+    name: stackname
+    servicename: '${stackname}-http'
+    location: location
+    containerAppEnvironmentId: containerAppEnvironment.outputs.id
+    containerImage: containerImage
+    envVars: [
+    {
+      name: 'APPLICATION_VERSION'
+      value: containerImageParts[1]
+    }  
+    {
+      name: 'APPLICATIONINSIGHTS_CONNECTION_STRING '
+      value: law.outputs.applicationInsightsConnectionString
+    }]
+    useExternalIngress: true
+    containerPort: containerPort
+    secrets: [
+      {
+        name: 'acrpassword'
+        value: acrPassword
+      }
+    ]
+    acrUsername: acrUsername
+    acrName: acrName
+  }
+}
+
 output fqdn string = containerApp.outputs.fqdn
