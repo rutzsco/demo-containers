@@ -76,7 +76,7 @@ module containerApp 'aca.bicep' = {
 module containerAppHttp 'aca.bicep' = {
   name: 'container-app-http'
   params: {
-    name: stackname
+    name: '${stackname}-http'
     servicename: '${stackname}-http'
     location: location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
