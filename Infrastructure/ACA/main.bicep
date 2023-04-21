@@ -25,6 +25,7 @@ module containerAppEnvironment 'aca-environment.bicep' = {
     
     lawClientId:law.outputs.clientId
     lawClientSecret: law.outputs.clientSecret
+     appInsightsConnectionString: law.outputs.applicationInsightsConnectionString
   }
 }
 
@@ -32,13 +33,19 @@ module containerApp 'aca.bicep' = {
   name: 'container-app'
   params: {
     name: stackname
+    servicename: stackname
     location: location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
     containerImage: containerImage
     envVars: []
     useExternalIngress: true
     containerPort: containerPort
-    acrPassword: acrPassword
+    secrets: [
+      {
+        name: 'acrpassword'
+        value: acrPassword
+      }
+    ]
     acrUsername: acrUsername
     acrName: acrName
   }

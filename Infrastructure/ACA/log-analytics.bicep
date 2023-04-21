@@ -15,6 +15,19 @@ resource law 'Microsoft.OperationalInsights/workspaces@2020-03-01-preview' = {
   })
 }
 
+resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: name
+  location: location
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    WorkspaceResourceId: law.id
+    Flow_Type: 'Bluefield'
+  }
+}
+
 
 output clientId string = law.properties.customerId
 output clientSecret string = law.listKeys().primarySharedKey
+output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
+output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString

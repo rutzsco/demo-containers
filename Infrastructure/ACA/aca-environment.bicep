@@ -1,7 +1,11 @@
 param name string
 param location string
 param lawClientId string
+
+@secure()
 param lawClientSecret string
+@secure()
+param appInsightsConnectionString string
 
 resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
   name: name
@@ -14,6 +18,8 @@ resource env 'Microsoft.App/managedEnvironments@2022-03-01' = {
         sharedKey: lawClientSecret
       }
     }
+    daprAIConnectionString: appInsightsConnectionString
   }
 }
 output id string = env.id
+
