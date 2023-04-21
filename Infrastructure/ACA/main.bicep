@@ -86,7 +86,7 @@ module containerAppHttp 'aca.bicep' = {
       value: containerImageParts[1]
     }  
     {
-      name: 'APPLICATIONINSIGHTS_CONNECTION_STRING '
+      name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
       value: law.outputs.applicationInsightsConnectionString
     }]
     useExternalIngress: true
