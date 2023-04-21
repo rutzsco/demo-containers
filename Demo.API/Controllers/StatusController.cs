@@ -20,7 +20,7 @@ namespace DemoAPI.Controllers
             _configuration = config;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult Get()
         {
             var version = _configuration["APPLICATION_VERSION"];
@@ -33,11 +33,6 @@ namespace DemoAPI.Controllers
         {
             var values = _configuration.AsEnumerable().Select(c => new KeyValuePair<string,string>(c.Key,c.Value));
             return values;
-
-            //var variables = new List<KeyValuePair<string, string>>();
-            //foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
-            //    variables.Add(new KeyValuePair<string, string>(de.Key.ToString(), de.Value.ToString()));
-            //return variables;
         }
     }
 }
