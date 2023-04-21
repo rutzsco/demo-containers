@@ -7,13 +7,14 @@ param containerPort int = 80
 param acrPassword string
 param acrUsername string
 param acrName string
+
 var stackname = '${appName}-${envName}'
 
 module law 'log-analytics.bicep' = {
 	name: 'log-analytics-workspace'
 	params: {
       location: location
-      name: '${stackname}-law'
+      name: stackname
 	}
 }
 
