@@ -41,6 +41,15 @@ module containerAppEnvironment 'aca-environment.bicep' = {
 }
 
 var containerImageParts = split(containerImage, ':')
+var envVars  = [
+  {
+    name: 'APPLICATION_VERSION'
+    value: containerImageParts[1]
+  }  
+  {
+    name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+    value: law.outputs.applicationInsightsConnectionString
+  }]
 
 module containerApp 'aca.bicep' = {
   name: 'container-app'
@@ -50,15 +59,7 @@ module containerApp 'aca.bicep' = {
     location: location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
     containerImage: containerImage
-    envVars: [
-    {
-      name: 'APPLICATION_VERSION'
-      value: containerImageParts[1]
-    }  
-    {
-      name: 'APPLICATIONINSIGHTS_CONNECTION_STRING '
-      value: law.outputs.applicationInsightsConnectionString
-    }]
+    envVars: envVars
     useExternalIngress: true
     containerPort: containerPort
     secrets: [
@@ -80,15 +81,7 @@ module containerAppHttp 'aca.bicep' = {
     location: location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
     containerImage: containerImage
-    envVars: [
-    {
-      name: 'APPLICATION_VERSION'
-      value: containerImageParts[1]
-    }  
-    {
-      name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-      value: law.outputs.applicationInsightsConnectionString
-    }]
+    envVars: envVars
     useExternalIngress: true
     containerPort: containerPort
     secrets: [
