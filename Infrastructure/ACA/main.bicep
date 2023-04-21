@@ -10,6 +10,16 @@ param acrName string
 
 var stackname = '${appName}-${envName}'
 
+// Service Bus
+module sb 'service-bus.bicep' = {
+  name: 'sb'
+  
+  params: {
+    location: location
+    serviceBusName: stackname
+  }
+}
+
 module law 'log-analytics.bicep' = {
 	name: 'log-analytics-workspace'
 	params: {
