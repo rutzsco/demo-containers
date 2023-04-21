@@ -30,6 +30,8 @@ module containerAppEnvironment 'aca-environment.bicep' = {
   }
 }
 
+var containerImageParts = split(containerImage, ':')
+
 module containerApp 'aca.bicep' = {
   name: 'container-app'
   params: {
@@ -38,7 +40,10 @@ module containerApp 'aca.bicep' = {
     location: location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
     containerImage: containerImage
-    envVars: []
+    envVars: [      {
+      name: 'APPLICATION_VERSION'
+      value: containerImageParts[1]
+    }]
     useExternalIngress: true
     containerPort: containerPort
     secrets: [

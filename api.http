@@ -1,5 +1,5 @@
-@baseUrl = http://20.84.18.210
-#@baseUrl = https://rutzsco-similation-service-aca.happyisland-d8fca1c2.eastus.azurecontainerapps.io
+#@baseUrl = http://20.84.18.210
+@baseUrl = https://rutzsco-sim-service-aca-ci.jollyfield-525c94da.eastus.azurecontainerapps.io
 
 ### Status  
 GET  {{baseUrl}}/api/status
