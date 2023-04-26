@@ -24,7 +24,8 @@ namespace DemoAPI.Controllers
         public IActionResult Get()
         {
             var version = _configuration["APPLICATION_VERSION"];
-            var vm = new { Version = version };
+            var deploymentRing = _configuration["DEPLOYMENT_RING"];
+            var vm = new { Version = version, DeploymentRing = deploymentRing };
             return new OkObjectResult(vm);
         }
 

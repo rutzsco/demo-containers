@@ -47,17 +47,21 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
           image: containerImage
           name: name
           env: envVars
+          resources: {
+            cpu: 2
+            memory: '4.0Gi'
+          }
         }
       ]    
       scale: {
-        minReplicas: 1
-        maxReplicas: 10
+        minReplicas: 0
+        maxReplicas: 25
         rules: [
           {
             name: 'http-rule'
             http: {
               metadata: {
-                concurrentRequests: '5'
+                concurrentRequests: '25'
               }
             }
           }

@@ -47,6 +47,10 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
           image: containerImage
           name: name
           env: envVars
+          resources: {
+            cpu: 2
+            memory: '4.0Gi'
+          }
         }
       ]    
       scale: {
