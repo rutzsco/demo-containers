@@ -1,10 +1,19 @@
 #@baseUrl = http://20.84.18.210
 @baseUrl = https://rutzsco-sim-service-aca-ci.jollyfield-525c94da.eastus.azurecontainerapps.io
+@baseHttpUrl = https://rutzsco-sim-service-aca-ci.jollyfield-525c94da.eastus.azurecontainerapps.io
 
 ### Status  
 GET  {{baseUrl}}/api/status
 content-type: application/json
 
 ### Simulate 
-GET  {{baseUrl}}/api/simulate/50?duration=1000
+GET  {{baseUrl}}/api/simulate/10?duration=1000
+content-type: application/json
+
+### HTTP Scale - Status  
+GET  {{baseUrl}}/api/status
+content-type: application/json
+
+### HTTP Scale - Simulate 
+GET  {{baseUrl}}/api/simulate/10?duration=1000
 content-type: application/json

@@ -73,7 +73,7 @@ module containerApp 'aca.bicep' = {
   }
 }
 
-module containerAppHttp 'aca.bicep' = {
+module containerAppHttp 'aca-http.bicep' = {
   name: 'container-app-http'
   params: {
     name: '${stackname}-http'
