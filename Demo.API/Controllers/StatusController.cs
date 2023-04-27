@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Demo.API.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 using System;
@@ -14,10 +15,11 @@ namespace DemoAPI.Controllers
     public class StatusController : Controller
     {
         private readonly IConfiguration _configuration;
-
-        public StatusController(IConfiguration config)
+        private readonly ILogger _logger;
+        public StatusController(IConfiguration config, ILogger<StatusController> logger)
         {
             _configuration = config;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -26,6 +28,8 @@ namespace DemoAPI.Controllers
             var version = _configuration["APPLICATION_VERSION"];
             var deploymentRing = _configuration["DEPLOYMENT_RING"];
             var vm = new { Version = version, DeploymentRing = deploymentRing };
+
+            _logger.LogInformation($"Processing Status - Version: {version} DeploymentRing: {deploymentRing}");
             return new OkObjectResult(vm);
         }
 

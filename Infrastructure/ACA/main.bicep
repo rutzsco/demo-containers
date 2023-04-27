@@ -45,7 +45,11 @@ var envVars  = [
   {
     name: 'APPLICATION_VERSION'
     value: containerImageParts[1]
-  }  
+  } 
+  {
+    name: 'DEPLOYMENT_RING'
+    value: 'Production1'
+  } 
   {
     name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
     value: law.outputs.applicationInsightsConnectionString
