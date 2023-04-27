@@ -26,10 +26,10 @@ namespace DemoAPI.Controllers
         public IActionResult Get()
         {
             var version = _configuration["APPLICATION_VERSION"];
-            var deploymentRing = _configuration["DEPLOYMENT_RING"];
-            var vm = new { Version = version, DeploymentRing = deploymentRing };
+            //var deploymentRing = _configuration["DEPLOYMENT_RING"];
+            var vm = new { Version = version };
 
-            _logger.LogInformation($"Processing Status - Version: {version} DeploymentRing: {deploymentRing}");
+            _logger.LogInformation($"Processing Status - Version: {version}");
             return new OkObjectResult(vm);
         }
 
