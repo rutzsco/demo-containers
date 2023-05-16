@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 using System;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,5 +41,15 @@ namespace DemoAPI.Controllers
             var values = _configuration.AsEnumerable().Select(c => new KeyValuePair<string,string>(c.Key,c.Value));
             return values;
         }
+
+        [HttpGet("kv")]
+        public IActionResult GetKVSecret(string secretName)
+        {
+            string keyvaultURL = Environment.GetEnvironmentVariable("KEYVAULT_URL");
+            SecretClient client = new SecretClient(new Uri(keyvaultURL),new DefaultAzureCredential());
+            var keyvaultSecret = client.GetSecret(secretName).Value;
+            return new OkObjectResult(keyvaultSecret);
+        }
+
     }
 }
