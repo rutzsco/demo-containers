@@ -45,7 +45,7 @@ stages:
               displayName: 2. Deploy to AKS
               inputs:
                 action: 'deploy'
-                kubernetesServiceConnection: 'aks-rutzsco-aks-001'
+                kubernetesServiceConnection: 'rutzsco-aks-S1'
                 namespace: 'simulationservice'
                 manifests: '$(Pipeline.Workspace)/build/Infrastructure/AKS/deployment-output.yaml'
                 containers: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'
