@@ -37,28 +37,12 @@ stages:
                 inlineScript: |
                   az aks get-credentials -n $(clusterName) -g $(resourceGroupName)
                   kubectl apply -f $(Pipeline.Workspace)/build/Infrastructure/AKS/namespace.yaml
-                  kubectl apply -f $(Pipeline.Workspace)/build/Infrastructure/AKS/namespace-ingresss.yaml
 
                   export APPLICATION_VERSION_VALUE=$(resources.pipeline.build.runName)
                   envsubst < $(Pipeline.Workspace)/build/Infrastructure/AKS/deployment.yaml > $(Pipeline.Workspace)/build/Infrastructure/AKS/deployment-output.yaml
 
-            - task: AzureCLI@2
-              displayName: 2. Create Ingress Controller
-              inputs:
-                azureSubscription:  $(azureSubscription)
-                scriptType: bash
-                scriptLocation: inlineScript
-                inlineScript: |
-                  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-                  helm repo update
-                  
-                  helm install ingress-nginx ingress-nginx/ingress-nginx \
-                  --create-namespace \
-                  --namespace ingress \
-                  --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
-
             - task: KubernetesManifest@0
-              displayName: 3. Deploy to AKS
+              displayName: 2. Deploy to AKS
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'rutzsco-aks-S1'
