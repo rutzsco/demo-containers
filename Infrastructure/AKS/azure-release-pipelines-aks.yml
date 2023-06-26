@@ -71,6 +71,5 @@ stages:
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'aks-rutzsco-aks-001'
-                namespace: 'simulationservice'
-                manifests: '$(Pipeline.Workspace)/build/Infrastructure/AKS/deployment-output.yaml'
-                containers: 'rutzscolabcr.azurecr.io/simulation/demo-api:$(resources.pipeline.build.runName)'
+                namespace: 'ingress'
+                manifests: '$(Pipeline.Workspace)/build/Infrastructure/AKS/ingress-route.yaml'
