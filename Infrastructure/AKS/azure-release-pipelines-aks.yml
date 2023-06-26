@@ -55,7 +55,7 @@ stages:
                   helm upgrade ingress-nginx ingress-nginx/ingress-nginx \
                   --install \
                   --create-namespace \
-                  --namespace ingress \
+                  --namespace simulationservice \
                   --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
 
             - task: KubernetesManifest@0
@@ -72,5 +72,5 @@ stages:
               inputs:
                 action: 'deploy'
                 kubernetesServiceConnection: 'aks-rutzsco-aks-001'
-                namespace: 'ingress'
+                namespace: 'simulationservice'
                 manifests: '$(Pipeline.Workspace)/build/Infrastructure/AKS/ingress-route.yaml'
