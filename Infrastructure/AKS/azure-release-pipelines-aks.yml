@@ -49,6 +49,7 @@ stages:
                 scriptType: bash
                 scriptLocation: inlineScript
                 inlineScript: |
+                  az aks get-credentials -n $(clusterName) -g $(resourceGroupName)
                   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
                   helm repo update
                   
