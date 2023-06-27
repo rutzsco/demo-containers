@@ -11,7 +11,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /simulation-service(/|$)(.*)
+      - path: /simulationservice(/|$)(.*)
         pathType: Prefix
         backend:
           service:
