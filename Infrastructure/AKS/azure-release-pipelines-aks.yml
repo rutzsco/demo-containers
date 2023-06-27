@@ -57,7 +57,7 @@ stages:
                   --install \
                   --create-namespace \
                   --namespace simulationservice \
-                  --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/api/status
+                  --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=static/api/status
 
             - task: KubernetesManifest@0
               displayName: 3. Deploy to AKS
